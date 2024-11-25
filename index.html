@@ -318,10 +318,12 @@
                enabling the creation of a <strong>compressed context</strong> consisting of the top-K% of image tokens and query tokens.
                 This compressed context facilitates efficient image re-prompting, allowing the model to answer additional questions without re-processing the full image, achieving near-original performance (96% accuracy) while using significantly fewer tokens—just 5% of the image tokens.
             </h2>
+            <br/>
             <!-- put the image in center -->
           <div class="columns is-centered">
               <img src="static/images/image_reprompting.png" alt="MY ALT TEXT" />
               </div>
+              <br/>
               <h2 class="subtitle">
     The tables summarize the Image re-prompting evaluation across 10 perception tasks from the MME benchmark. Metrics include accuracy (ACC), ACC+ (percentage of questions answered correctly per image), and the number of tokens used for re-prompting.
 The Naive model (i.e., full access to all tokens) achieves slightly higher accuracy, but the compressed context with K=5% retains 96% of the performance while using 12x fewer tokens, highlighting its efficiency for image re-prompting.
