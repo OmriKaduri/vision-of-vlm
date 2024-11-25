@@ -305,20 +305,35 @@
 
       </div>
     </section>
-<!-- 
-    <section class="hero is-small is-white">
-      <div class="hero-body">
-        <div class="container">
+
+    <section class="hero teaser is-white ">
+      <div class="container">
+        <div class="hero-body">
+
+          <div class="column">
           <div>
-            <h2 class="title is-3 has-text-centered">Image Re-prompting</h2>
-            <img src="static/images/image_reprompting.png" width="500" height='500' alt="MY ALT TEXT" />
-            <h2 class="subtitle has-text-centered">
-              BLA BLA
+            <h2 class="title is-3 has-text-centered">Image re-prompting</h2>
+            <h2 class="subtitle">
+              Our analysis reveals that VLMs compress visual information into a small subset of highly attended tokens,
+               enabling the creation of a <strong>compressed context</strong> consisting of the top-K% of image tokens and query tokens.
+                This compressed context facilitates efficient image re-prompting, allowing the model to answer additional questions without re-processing the full image, achieving near-original performance (96% accuracy) while using significantly fewer tokens—just 5% of the image tokens.
             </h2>
+            <!-- put the image in center -->
+          <div class="columns is-centered">
+              <img src="static/images/image_reprompting.png" alt="MY ALT TEXT" />
+              </div>
+              <h2 class="subtitle">
+    The tables summarize the Image re-prompting evaluation across 10 perception tasks from the MME benchmark. Metrics include accuracy (ACC), ACC+ (percentage of questions answered correctly per image), and the number of tokens used for re-prompting.
+The Naive model (i.e., full access to all tokens) achieves slightly higher accuracy, but the compressed context with K=5% retains 96% of the performance while using 12x fewer tokens, highlighting its efficiency for image re-prompting.
+              </h2>
+                        <div class="columns is-centered"></div>
+              <img src="static/images/mme.png" alt="MY ALT TEXT" />
+              </div>
+        </div>
         </div>
       </div>
       </div>
-      </section> -->
+      </section>
 
     <!--BibTex citation -->
     <section class="section" id="BibTeX">
