@@ -164,56 +164,25 @@
       </div>
     </section>
 
-    <!-- Teaser video-->
-    <!-- <section class="hero teaser">
-      <div class="container is-max-desktop">
-        <div class="hero-body">
-          <video poster="" id="tree" autoplay controls muted loop height="100%">
-            <source src="static/videos/banner_video.mp4" type="video/mp4" />
-          </video>
-          <h2 class="subtitle has-text-centered">
-            Aliquam vitae elit ullamcorper tellus egestas pellentesque. Ut lacus
-            tellus, maximus vel lectus at, placerat pretium mi. Maecenas
-            dignissim tincidunt vestibulum. Sed consequat hendrerit nisl ut
-            maximus.
-          </h2>
-        </div>
-      </div>
-    </section> -->
 
-    <!-- End teaser video -->
 
     <!-- Paper abstract -->
     <section class="section hero is-light">
       <div class="container is-max-desktop">
         <div class="columns is-centered has-text-centered">
           <div class="column is-four-fifths">
-            <h2 class="title is-3">Abstract</h2>
+            <h2 class="title is-3">How Visual-Language Models see?</h2>
             <div class="content has-text-justified">
               <p>
-                Vision-Language Models (VLMs) have recently demonstrated
-                remarkable capabilities in comprehending complex visual content.
-                However, the mechanisms underlying how VLMs process visual
-                information remain largely unexplored. In this paper, we conduct
-                a thorough empirical analysis, focusing on the attention modules
-                across layers, by which we reveal several key insights about how
-                these models process visual data: (i) the internal
-                representation of the query tokens (e.g., representations of
-                "describe the image"), is utilized by the model to store global
-                image information; we demonstrate that the model generates
-                surprisingly descriptive responses solely from these tokens,
-                without direct access to image tokens. (ii) Cross-modal
-                information flow is predominantly influenced by the middle
-                layers (approximately 25% of all layers), while early and late
-                layers contribute only marginally. (iii) Fine-grained visual
-                attributes and object details are directly extracted from image
-                tokens in a spatially localized manner, i.e., the generated
-                tokens associated with specific object or attribute attend
-                strongly to their corresponding regions in the image. We propose
-                novel quantitative evaluation to validate our observations,
-                leveraging real-world complex visual scenes. Finally, we
-                demonstrate the potential of our findings in facilitating
-                efficient visual processing in state-of-the-art VLMs.
+                In this paper, we focused on understanding how Vision-Language 
+                Models (VLMs) process visual information. We focus on the attention
+                modules across layers, and reveal that:
+                <ol>
+                  <li>Query tokens are used by the model to store <b>global image information</b>.</li>
+                  <li>Cross-modal information flow is <b>predominantly influenced by the middle layers</b>.</li>
+                  <li>Fine-grained details are directly extracted from image tokens in a <b>spatially localized manner</b>.</li>
+                </ol>
+                In this project page, we provide a brief overview of our findings and demonstrate the potential of our observations in facilitating efficient visual processing in state-of-the-art VLMs.
               </p>
             </div>
           </div>
@@ -222,34 +191,67 @@
     </section>
     <!-- End paper abstract -->
 
+    <!-- Teaser video-->
+    <section class="hero teaser ">
+      <div class="container">
+        <div class="hero-body">
+          <div class="columns is-centered has-text-centered">
+          <div class="column">
+
+          <video poster="" id="tree" autoplay controls muted loop height="100%">
+            <source src="static/videos/banner_video.mp4" type="video/mp4" />
+          </video>
+          <h2 class="title is-3">Visual Information Knockout</h2>
+
+          <h2 class="subtitle has-text-centered">
+            We aim to understand how Vision-Language Models process visual information. 
+            We reveal that these models are able to generate descriptive responses while only attending directly to query tokens (e.g., "describe the image"), without direct access to image tokens. 
+            <br/>Moreover, the query tokens must pull global image information, otherwise the model fails to describe the image.
+            <br/> Next, we describe the llm-as-a-judge evaluation protocol, which allows us to evaluate the model's ability to identify objects in the image.
+
+          </h2>
+        </div>
+          </div>
+          </div>
+      </div>
+    </section>
+
+    <!-- Here goes llm-as-a-judge animation -->
+    <section class="hero is-small is-light">
+      <div class="hero-body">
+        <div class="container">
+          <div class="columns is-centered">
+            <div class="column">
+              <h2 class="title is-3 has-text-centered">LLM-as-a-judge for Knockout Evaluation</h2>
+              <video poster="" id="tree" autoplay controls muted loop height="100%">
+                <source src="static/videos/llm-as-a-judge.mp4" type="video/mp4" />
+              </video>
+              <h2 class="subtitle has-text-centered">
+                Automatically counting the number of identified or hallucinated objects in free-text paragraphs is challenging. <br/>
+                Therefore, we propose the LLM-as-a-judge evaluation protocol, which allows us to automatically assesses object identification and hallucinated objects in generated responses under different knockout configurations.
+            </div>
+          </div>
+        </div>
+      </div>
+
     <!-- Image carousel -->
-    <section class="hero is-small">
+    <section class="hero is-small is-white">
       <div class="hero-body">
         <div class="container">
           <!-- <div id="results-carousel" class="carousel results-carousel"> -->
             <!-- <div class="item"> -->
-              <img src="static/images/knonckout_illustration_omri_2_llava.png" alt="MY ALT TEXT" />
+              <h2 class="title is-3 has-text-centered">Visual Information Knockout Evaluation</h2>
+
+              <img src="static/images/knonckout_illustration.png" alt="MY ALT TEXT" />
               <h2 class="subtitle has-text-centered">
-                First image description.
+                 <b>Analyzing  visual information flow via attention knockout:</b>
+                  <br>
+                  (a) The VLM employs causal masking allowing generated and query tokens to gather information from image tokens, but not vice versa. <br/>
+                  We analyze three knockout configurations: (b) <b>Image-to-generated</b>: visual information flows to generated tokens only through query tokens, (c) <b>Image-to-query</b>: blocks query tokens from accessing image information, and (d) <b>Image-to-others</b>: blocks image tokens from all other tokens.
+                  (e) Evaluation of model responses under each knockout configuration reveals that <b>Image-to-generated</b> knockout achieves a <b>0.4 F1 score</b> despite indirect image access, while <b>Image-to-query fails completely</b>, demonstrating query tokens' essential role as global image descriptors.
+                  <br>
+                  (f) We expand previous experiments by knocking out attention, starting from layer <b>l</b>. Results highlight a consistent drastic rise  in F1 scores in the mid-layers, suggesting their critical role in visual information processing.
               </h2>
-            <!-- </div> -->
-            <!-- <div class="item">
-              <img src="static/images/carousel2.jpg" alt="MY ALT TEXT" />
-              <h2 class="subtitle has-text-centered">
-                Second image description.
-              </h2>
-            </div>
-            <div class="item">
-              <img src="static/images/carousel3.jpg" alt="MY ALT TEXT" />
-              <h2 class="subtitle has-text-centered">
-                Third image description.
-              </h2>
-            </div>
-            <div class="item">
-              <img src="static/images/carousel4.jpg" alt="MY ALT TEXT" />
-              <h2 class="subtitle has-text-centered">
-                Fourth image description.
-              </h2> -->
             </div>
           </div>
         </div>
@@ -257,93 +259,28 @@
     </section>
     <!-- End image carousel -->
 
-    <!-- Youtube video -->
-    <section class="hero is-small is-light">
+    <section class="hero is-small"></section>
       <div class="hero-body">
         <div class="container">
-          <!-- Paper video. -->
-          <h2 class="title is-3">What's in the image?</h2>
-          <div class="columns is-centered has-text-centered">
-            <div class="column is-four-fifths">
-              <!-- <div class="publication-video">
-                <iframe
-                  src="https://www.youtube.com/embed/JkaxUblCGz0"
-                  frameborder="0"
-                  allow="autoplay; encrypted-media"
-                  allowfullscreen
-                ></iframe>
-              </div> -->
+          <h2 class="title is-3 has-text-centered">Details localized in the mid-layers</h2>
+          <div id="results-carousel" class="carousel results-carousel">
+            <div class="item">
+              <img src="static/images/attn_to_details-projectpage-1.png" alt="MY ALT TEXT" />
+              <h2 class="subtitle has-text-centered">
+                BLA BLA
+              </h2>
+            </div>
+            <div class="item">
+              <img src="static/images/attn_to_details-projectpage-1.png" alt="MY ALT TEXT" />
+              <h2 class="subtitle has-text-centered">
+                BLA BLA
+              </h2>
             </div>
           </div>
         </div>
       </div>
     </section>
-    <!-- End youtube video -->
 
-    <!-- Video carousel -->
-    <!-- <section class="hero is-small">
-      <div class="hero-body">
-        <div class="container">
-          <h2 class="title is-3">Another Carousel</h2>
-          <div id="results-carousel" class="carousel results-carousel">
-            <div class="item item-video1">
-              <video
-                poster=""
-                id="video1"
-                autoplay
-                controls
-                muted
-                loop
-                height="100%"
-              >
-                <source src="static/videos/carousel1.mp4" type="video/mp4" />
-              </video>
-            </div>
-            <div class="item item-video2">
-              <video
-                poster=""
-                id="video2"
-                autoplay
-                controls
-                muted
-                loop
-                height="100%"
-              >
-                <source src="static/videos/carousel2.mp4" type="video/mp4" />
-              </video>
-            </div>
-            <div class="item item-video3">
-              <video
-                poster=""
-                id="video3"
-                autoplay
-                controls
-                muted
-                loop
-                height="100%"
-              >
-                \
-                <source src="static/videos/carousel3.mp4" type="video/mp4" />
-              </video>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section> -->
-    <!-- End video carousel -->
-
-    <!-- Paper poster -->
-    <!-- <section class="hero is-small is-light">
-      <div class="hero-body">
-        <div class="container">
-          <h2 class="title">Poster</h2>
-
-          <iframe src="static/pdfs/sample.pdf" width="100%" height="550">
-          </iframe>
-        </div>
-      </div>
-    </section> -->
-    <!--End paper poster -->
 
     <!--BibTex citation -->
     <section class="section" id="BibTeX">
