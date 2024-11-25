@@ -171,19 +171,16 @@
       <div class="container is-max-desktop">
         <div class="columns is-centered has-text-centered">
           <div class="column is-four-fifths">
-            <h2 class="title is-3">How Visual-Language Models see?</h2>
+            <h2 class="title is-3">Abstract</h2>
             <div class="content has-text-justified">
               <p>
-                In this paper, we focused on understanding how Vision-Language 
-                Models (VLMs) process visual information. We focus on the attention
-                modules across layers, and reveal that:
-                <ol>
-                  <li>Query tokens are used by the model to store <b>global image information</b>.</li>
-                  <li>Cross-modal information flow is <b>predominantly influenced by the middle layers</b>.</li>
-                  <li>Fine-grained details are directly extracted from image tokens in a <b>spatially localized manner</b>.</li>
-                </ol>
-                In this project page, we provide a brief overview of our findings and demonstrate the potential of our observations in facilitating efficient visual processing in state-of-the-art VLMs.
-              </p>
+                Vision-Language Models (VLMs) have recently demonstrated remarkable capabilities in comprehending complex visual content. 
+                However, the mechanisms underlying how VLMs process visual information remain largely unexplored. 
+                In this paper,  we conduct a thorough empirical analysis, focusing on the attention modules across layers.
+                We reveal several key insights about how these models process visual data: (i) the internal representation of the query tokens (e.g., representations of "describe the image"), is utilized by 
+                VLMs to store global image information; we demonstrate that these models generate surprisingly descriptive responses solely from these tokens, without direct access to image tokens.  (ii) Cross-modal information flow is predominantly influenced by the middle layers (approximately 25% of all layers), while early and late layers contribute only marginally. 
+                (iii) Fine-grained visual attributes and object details are directly extracted from image tokens in a spatially localized manner, i.e., the generated tokens associated with a specific object or attribute attend strongly to their corresponding regions in the image.  
+                We propose novel quantitative evaluation to validate our observations, leveraging real-world complex visual scenes. Finally, we demonstrate the potential of our findings in facilitating efficient visual processing in state-of-the-art VLMs.              </p>
             </div>
           </div>
         </div>
@@ -195,21 +192,20 @@
     <section class="hero teaser ">
       <div class="container">
         <div class="hero-body">
-          <div class="columns is-centered has-text-centered">
+          <div class="columns is-centered ">
           <div class="column">
-
+            <br>
+          <h2 class="title is-3 has-text-centered">Visual Information Knockout</h2>
+          <div class="is-four-fifths">
+          <h2 class="subtitle">
+              Our analysis reveals that VLMs compress high-level image information into query text tokens, enabling the model to generate descriptive responses even when direct access to image tokens is blocked. Through knockout experiments, we show that visual information is encoded and retrieved indirectly via the query tokens, highlighting their pivotal role as global image descriptors.
+          </h2>
+          </div>
           <video poster="" id="tree" autoplay controls muted loop height="100%">
             <source src="static/videos/banner_video.mp4" type="video/mp4" />
           </video>
-          <h2 class="title is-3">Visual Information Knockout</h2>
 
-          <h2 class="subtitle has-text-centered">
-            We aim to understand how Vision-Language Models process visual information. 
-            We reveal that these models are able to generate descriptive responses while only attending directly to query tokens (e.g., "describe the image"), without direct access to image tokens. 
-            <br/>Moreover, the query tokens must pull global image information, otherwise the model fails to describe the image.
-            <br/> Next, we describe the llm-as-a-judge evaluation protocol, which allows us to evaluate the model's ability to identify objects in the image.
 
-          </h2>
         </div>
           </div>
           </div>
@@ -223,12 +219,14 @@
           <div class="columns is-centered">
             <div class="column">
               <h2 class="title is-3 has-text-centered">LLM-as-a-judge for Knockout Evaluation</h2>
+                            <h2 class="subtitle">
+                Automatically counting the number of identified or hallucinated objects in free-text paragraphs is challenging. <br/>
+                Therefore, we propose the LLM-as-a-judge evaluation protocol, which allows us to automatically assess object identification and hallucinated objects in generated responses under different knockout configurations.
+                </h2>
               <video poster="" id="tree" autoplay controls muted loop height="100%">
                 <source src="static/videos/llm-as-a-judge.mp4" type="video/mp4" />
               </video>
-              <h2 class="subtitle has-text-centered">
-                Automatically counting the number of identified or hallucinated objects in free-text paragraphs is challenging. <br/>
-                Therefore, we propose the LLM-as-a-judge evaluation protocol, which allows us to automatically assesses object identification and hallucinated objects in generated responses under different knockout configurations.
+
             </div>
           </div>
         </div>
@@ -240,18 +238,38 @@
         <div class="container">
           <!-- <div id="results-carousel" class="carousel results-carousel"> -->
             <!-- <div class="item"> -->
-              <h2 class="title is-3 has-text-centered">Visual Information Knockout Evaluation</h2>
+              <h2 class="title is-3 has-text-centered">Analyzing Visual Information Flow in Vision-Language Models</h2>
+              <div>
+                  <p>
+                      The figure below illustrates the flow of visual information in Vision-Language Models (VLMs) through an <strong>attention knockout</strong> analysis:
+                  </p>
+                  <ul>
+                      <li>
+                          <strong>(a) Baseline (No Knockout)</strong>: The VLM employs only causal masking, allowing query and generated tokens to access image tokens.
+                      </li>
+                      <li>
+                          To analyze the role of visual information flow, three attention knockout strategies were employed:
+                          <ul>
+                              <li><strong>(b) Image-to-generated knockout</strong>: Image tokens influence generated tokens only indirectly via query tokens.</li>
+                              <li><strong>(c) Image-to-query knockout</strong>: Query tokens are prevented from accessing image information, isolating them from the visual context.</li>
+                              <li><strong>(d) Image-to-others knockout</strong>: Image tokens are blocked from attending to all other tokens.</li>
+                          </ul>
+                      </li>
+                      <li>
+                          <strong>(e) Evaluation</strong>: The performance of the model under each knockout configuration (at all layers) was measured. In the Image-to-generated configuration, the model achieved an F1 score of 0.4, demonstrating that query tokens successfully encode and relay global visual information. In contrast, the Image-to-query configuration led to a complete failure, highlighting the essential role of query tokens as global image descriptors.
+                      </li>
+                      <li>
+                          <strong>(f) Knockout from layer onward</strong>: The analysis was extended by applying knockouts starting at different layers. Results indicate a significant increase in F1 scores at the mid-layers, underscoring their critical role.
+                      </li>
+                  </ul>
+                  <p>
+                      This analysis highlights the importance of query tokens in encoding global visual information and emphasizes the mid-layers' pivotal role in visual information flow.
+                  </p>
+              </div>
+              <br/>
+
 
               <img src="static/images/knonckout_illustration.png" alt="MY ALT TEXT" />
-              <h2 class="subtitle has-text-centered">
-                 <b>Analyzing  visual information flow via attention knockout:</b>
-                  <br>
-                  (a) The VLM employs causal masking allowing generated and query tokens to gather information from image tokens, but not vice versa. <br/>
-                  We analyze three knockout configurations: (b) <b>Image-to-generated</b>: visual information flows to generated tokens only through query tokens, (c) <b>Image-to-query</b>: blocks query tokens from accessing image information, and (d) <b>Image-to-others</b>: blocks image tokens from all other tokens.
-                  (e) Evaluation of model responses under each knockout configuration reveals that <b>Image-to-generated</b> knockout achieves a <b>0.4 F1 score</b> despite indirect image access, while <b>Image-to-query fails completely</b>, demonstrating query tokens' essential role as global image descriptors.
-                  <br>
-                  (f) We expand previous experiments by knocking out attention, starting from layer <b>l</b>. Results highlight a consistent drastic rise  in F1 scores in the mid-layers, suggesting their critical role in visual information processing.
-              </h2>
             </div>
           </div>
         </div>
@@ -259,28 +277,49 @@
     </section>
     <!-- End image carousel -->
 
-    <section class="hero is-small"></section>
+    <section class="hero is-small">
       <div class="hero-body">
         <div class="container">
           <h2 class="title is-3 has-text-centered">Details localized in the mid-layers</h2>
+          <div>
+              <p>
+                  The figure below visualizes the alignment between generated token attention to image tokens and object locations.
+              </p>
+              <p>
+                  Pseudo ground truth object masks were obtained using SAM to validate the alignment. 
+                  The peak of the attention maps, marked with a white cross, consistently matches the location of the objects in the image, demonstrating the model's ability to attend to specific visual elements. 
+              </p>
+          </div>
           <div id="results-carousel" class="carousel results-carousel">
             <div class="item">
               <img src="static/images/attn_to_details-projectpage-1.png" alt="MY ALT TEXT" />
-              <h2 class="subtitle has-text-centered">
-                BLA BLA
-              </h2>
             </div>
             <div class="item">
-              <img src="static/images/attn_to_details-projectpage-1.png" alt="MY ALT TEXT" />
-              <h2 class="subtitle has-text-centered">
-                BLA BLA
-              </h2>
+              <img src="static/images/attn_to_details-projectpage-2.png" alt="MY ALT TEXT" />
+            </div>
+              <div class="item">
+              <img src="static/images/attn_to_details-projectpage-3.png" alt="MY ALT TEXT" />
             </div>
           </div>
         </div>
+
+
       </div>
     </section>
-
+<!-- 
+    <section class="hero is-small is-white">
+      <div class="hero-body">
+        <div class="container">
+          <div>
+            <h2 class="title is-3 has-text-centered">Image Re-prompting</h2>
+            <img src="static/images/image_reprompting.png" width="500" height='500' alt="MY ALT TEXT" />
+            <h2 class="subtitle has-text-centered">
+              BLA BLA
+            </h2>
+        </div>
+      </div>
+      </div>
+      </section> -->
 
     <!--BibTex citation -->
     <section class="section" id="BibTeX">
@@ -303,13 +342,11 @@
                   target="_blank"
                   >Academic Project Page Template</a
                 >
-                which was adopted from the <a
+                which was adopted from the <a
                   href="https://nerfies.github.io"
                   target="_blank"
                   >Nerfies</a
-                > project page. You are free to borrow the source code of this
-                website, we just ask that you link back to this page in the
-                footer. <br />
+                > project page. 
                 This website is licensed under a
                 <a
                   rel="license"
